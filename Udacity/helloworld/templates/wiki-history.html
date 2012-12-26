@@ -1,0 +1,23 @@
+{%extends "base.html"%}
+
+{% block content %}
+
+<table>
+    {%for wiki in history%}
+    <tr>
+        <td>
+            {{wiki.created.strftime("%c")}}
+        </td>
+        <td>
+            {{wiki.content}}
+        </td>
+        <td>
+            <a href="/wiki{{wiki.name}}">view</a>
+        </td>
+        <td>
+            <a href="/wiki/_edit{{wiki.name}}">edit</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
