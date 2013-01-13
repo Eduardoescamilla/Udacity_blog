@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" type="text/css" href= "/static/main.css">
+		<title>My Blog</title>
+	</head>
+	<body>
+		<header class="main-title">
+			<h1>My Blog</h1>
+		</header>
+
+		<nav id="navbar">
+			<ul>
+				<li>
+					<a href="/blog"> Home</a>
+				</li>
+				<li>
+					<a href="/blog/newpost"> New Post</a>
+				</li>
+				{% if user %}
+				<li>
+					<a href="/blog/logout">{{user.username}}(logout)</a>
+				</li>
+				{% else %}
+				<li>
+					<a href="/blog/login">login</a>
+				</li>
+				<li>
+					<a href="/blog/signup">signup</a>
+				</li>
+				{% endif %}
+			</ul>
+		</nav>
+
+		{% block content %}
+		{% endblock %}
+
+	</body>
+</html>

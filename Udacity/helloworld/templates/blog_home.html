@@ -1,0 +1,33 @@
+{%extends "blog_base.html"%}
+
+{% block content %}
+
+<section>
+	{% for post in posts %}
+	<article class='post'>
+
+		<header class="post-heading">
+			<hgroup>
+				<h1 class='post-title'><a href="/blog/{{post.key().id()}}"> {{post.subject}}</a></h1>
+
+				<h2 class="post-date">
+				<time datetime="{{post.created.strftime('%c')}}">
+					{{post.created.strftime("%b %d, %Y")}}
+				</time></h2>
+			</hgroup>
+		</header>
+
+		<div class='post-content' >
+			{{post.content.replace("\n", "
+			<br>
+			")|safe}}
+		</div>
+	</article>
+	{% endfor %}
+
+	<footer>
+		<span class="age"> Queried {{stamp.total_seconds()}} seconds ago </span>
+	</footer>
+</section>
+
+{% endblock %}

@@ -16,7 +16,7 @@ class Signup(Handler):
                         error_email="",
                         username="",
                         email=""):
-        self.render("signup.html", error_username=error_username,
+        self.render("blog_signup.html", error_username=error_username,
                         error_password=error_password,
                         error_verify=error_verify,
                         error_email=error_email,
@@ -75,7 +75,7 @@ class Signup(Handler):
 
 class Login(Handler):
     def get(self):
-        self.render("login.html")
+        self.render("blog_login.html")
     
     def post(self):
         username = self.request.get("username")
@@ -86,7 +86,7 @@ class Login(Handler):
             self.redirect("/blog/welcome")
         else:
             error_login = "Invalid Login"
-            self.render("login.html", username=username, error_login=error_login)
+            self.render("blog_login.html", username=username, error_login=error_login)
 
 class Logout(Handler):
     def get(self):
@@ -96,7 +96,7 @@ class Logout(Handler):
 class Welcome(Handler):
     def get(self):        
         username = self.user.username
-        self.render("welcome.html", username=username)
+        self.render("blog_welcome.html", username=username)
         
 def top_posts(update=None):
     key = "top"
@@ -117,7 +117,7 @@ class Blog (Handler):
     def get(self):
         posts, stamp = top_posts()
         stamp = datetime.datetime.today() - stamp
-        self.render("main.html", posts=posts, stamp = stamp)
+        self.render("blog_home.html", posts=posts, stamp = stamp)
      
 def get_post(post_id):
     key = "permalink%s" %post_id
@@ -140,13 +140,13 @@ class BlogPost (Handler):
             self.error(404)
             return
         stamp = datetime.datetime.today() - stamp
-        self.render("main.html", posts=[post], stamp=stamp)
+        self.render("blog_home.html", posts=[post], stamp=stamp)
         
 class NewPost(Handler):
     
     def get(self):
         if self.user:
-            self.render("newpost.html")
+            self.render("blog_newpost.html")
         else:
             self.redirect("/blog/login")
     
@@ -165,7 +165,7 @@ class NewPost(Handler):
             self.redirect("/blog/%i" % (post.key().id()))
         else:
             error = "we need both subject and content"
-            self.render("newpost.html", subject=subject, content=content, error=error)
+            self.render("blog_newpost.html", subject=subject, content=content, error=error)
 
 class Blog2Json(Handler):
     def get(self):

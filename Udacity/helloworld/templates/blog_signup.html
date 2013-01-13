@@ -1,0 +1,45 @@
+{%extends "blog_base.html"%}
+
+{% block content %}
+
+<section>
+	<header>
+		<h1>Sign up</h1>
+	</header>
+	
+	<form method="post">
+		<table>
+			<tr>
+				<td> <label for="username"> Username </label></td>
+				<td>
+				<input id="username" name="username" value="{{username}}" placeholder="username" required="required">
+				</td>
+				<td class="error"> {{error_username}} </td>
+			</tr>
+			<tr>
+				<td> <label for="password"> Password </label> </td>
+				<td>
+				<input type="password" id="password" name="password" placeholder="**********" required="required">
+				</td>
+				<td class="error"> {{error_password}} </td>
+			</tr>
+			<tr>
+				<td> <label for="verify"> Verify Password </label> </td>
+				<td>
+				<input type="password" id="verify" name="verify" placeholder="**********" required="required">
+				</td>
+				<td class="error" > {{error_verify}} </td>
+			</tr>
+			<tr>
+				<td><label for="email"> Email(optional) </label></td>
+				<td>
+				<input type="email" id="email" name="email" value="{{email}}" placeholder="jose@jose.com">
+				</td>
+				<td class="error"> {{error_email}} </td>
+			</tr>
+		</table>
+		<input type="submit" value="Save">
+	</form>
+</section>
+
+{% endblock %}
