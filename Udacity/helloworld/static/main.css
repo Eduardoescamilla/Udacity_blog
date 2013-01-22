@@ -167,5 +167,6 @@ input[type=submit] {
 #navbar a:hover {
     background-color: #999;
     text-decoration: none;
+    border-right: 0.1em solid #333333;
     -webkit-box-shadow: 0.25em 0.25em 5px black inset;
 }
