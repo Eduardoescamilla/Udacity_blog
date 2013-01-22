@@ -139,9 +139,9 @@ input[type=submit] {
     top: 0;
     left: auto;
     margin: 0;
+    border: 0.1em solid #333333;
     width: inherit;
     background: #c9c9c9;
-    
 }
 
 #navbar ul {
@@ -167,4 +167,5 @@ input[type=submit] {
 #navbar a:hover {
     background-color: #999;
     text-decoration: none;
+    -webkit-box-shadow: 0.25em 0.25em 5px black inset;
 }
