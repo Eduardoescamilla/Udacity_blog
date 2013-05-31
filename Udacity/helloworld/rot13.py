@@ -1,10 +1,4 @@
-'''
-Created on Nov 17, 2012
-
-@author: guilherme
-'''
-
-import cgi
+from utils import escape_html
 import webapp2
 
 rot13_form = """
@@ -18,8 +12,7 @@ Enter some text to ROT13:
 </form>
 """
 
-def escape_html(s):
-    return cgi.escape(s, quote=True)
+
 
 def rot13_encryption(text):
     normal_lower = "abcdefghijklmnopqrstuvwxyz"

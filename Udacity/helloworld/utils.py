@@ -1,13 +1,8 @@
-'''
-Created on Nov 17, 2012
-
-@author: guilherme
-'''
-
+import cgi
+import hashlib
 import hmac
 import random
 import string
-import hashlib
 
 secret = 'fart'
 
@@ -31,3 +26,6 @@ def make_pw_hash(name, pw, salt=None):
 def valid_pw(name, pw, h):
     salt = h.split(',')[1]
     return h == make_pw_hash(name, pw, salt)
+
+def escape_html(s):
+    return cgi.escape(s, quote=True)

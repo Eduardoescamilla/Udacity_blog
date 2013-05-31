@@ -1,9 +1,3 @@
-'''
-Created on Nov 17, 2012
-
-@author: guilherme
-'''
-
 from handler import Handler
 from models import Wiki, User
 import re
@@ -45,14 +39,14 @@ class WikiEdit(Handler):
             content = self.request.get("content")
             if not content:
                 self.render("wiki-edit.html", error="We need content")
-                return
-            wiki = Wiki(name = page, content = content)
-            wiki.put()
-            self.redirect("/wiki%s" %page)
+            else:
+                wiki = Wiki(name = page, content = content)
+                wiki.put()
+                self.redirect("/wiki%s" %page)
 
 class Login(Handler):
     def get(self):
-        self.render("login.html")
+        self.render("wiki_login.html")
     
     def post(self):
         username = self.request.get("username")
@@ -63,7 +57,7 @@ class Login(Handler):
             self.redirect("/wiki/welcome")
         else:
             error_login = "Invalid Login"
-            self.render("login.html", username=username, error_login=error_login)
+            self.render("wiki_login.html", username=username, error_login=error_login)
 
 
 class Logout(Handler):
@@ -75,7 +69,7 @@ class Logout(Handler):
 class Signup(Handler):
    
     def get(self):
-        self.render("signup.html")
+        self.render("wiki_signup.html")
         
     def post(self):
         username = self.request.get("username")
@@ -97,10 +91,10 @@ class Signup(Handler):
             params["error_email"] = "That's not a valid email"
             error = True
         if error:
-            self.render("signup.html", **params)
+            self.render("wiki_signup.html", **params)
         elif self.exists_username(username):
             params["error_username"] = "Username already exists"
-            self.render("signup.html", **params)
+            self.render("wiki_signup.html", **params)
         else:            
             user = User.register(username, password, email)
             user.put()
@@ -124,9 +118,11 @@ class Signup(Handler):
 
 
 class Welcome(Handler):
-    def get(self):        
-        username = self.user.username
-        self.render("welcome.html", username=username)
+    def get(self):    
+        if self.user:    
+            self.render("wiki_welcome.html", username=self.user.username)
+        else:
+            self.redirect("/wiki/login")
 
 class History(Handler):
     def get(self, page):

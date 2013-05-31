@@ -1,8 +1,3 @@
-'''
-Created on Nov 17, 2012
-
-@author: guilherme
-'''
 from models import User
 from utils import check_secure_val, make_secure_val
 import jinja2

@@ -1,0 +1,31 @@
+{%extends "wiki_base.html"%}
+
+{% block content %}
+
+<section>
+	<header>
+		<h1>Login</h1>
+	</header>	
+	<form method="post">
+		<table>
+			<tr>
+				<td><label for="username"> Username </label></td>
+				<td>
+				<input id="username" name="username" value="{{username}}" placeholder="username" required="required">
+				</td>
+			</tr>
+			<tr>
+				<td><label for="password"> Password </label></td>
+				<td>
+				<input type="password" id="password" name="password" placeholder="********" required="required">
+				</td>
+			</tr>
+		</table>
+		<div class="error">
+			{{error_login}}
+		</div>
+		<input type="submit" value="Log In">
+	</form>
+</section>
+
+{% endblock %}

@@ -1,9 +1,3 @@
-'''
-Created on Nov 17, 2012
-
-@author: guilherme
-'''
-
 from google.appengine.ext import db
 from utils import make_pw_hash, valid_pw
 
