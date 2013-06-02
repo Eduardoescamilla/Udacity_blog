@@ -2,17 +2,24 @@ from handler import Handler
 from models import Wiki, User
 import re
 
-def get_wiki(wiki_name):
+def get_last_wiki_by_name(wiki_name):
     return Wiki.all().filter("name", wiki_name).order("-created").get()
 
+def get_wiki(wiki_name, wiki_id):
+    if wiki_id.isdigit():
+        wiki = Wiki.by_id(int(wiki_id))
+        if wiki:
+            return wiki
+    return get_last_wiki_by_name(wiki_name)
+
 def get_wiki_history(wiki_name):
-    return list(Wiki.all().filter("name", wiki_name))
+    return list(Wiki.all().filter("name", wiki_name).order("-created"))
 
 class WikiPage(Handler):
     def get(self, page):
-        wiki = get_wiki(page)
-        params = {"page":page}
+        wiki = get_wiki(page, self.request.get("id"))
         if wiki:
+            params = {"page":page}
             params["content"] = wiki.content
             self.render("wikipage.html", **params)
         elif self.user:
@@ -20,11 +27,10 @@ class WikiPage(Handler):
         else:
             self.redirect("/wiki/login")
             
-            
 class WikiEdit(Handler):
     def get(self, page):
         if self.user:
-            wiki = get_wiki(page)
+            wiki = get_wiki(page, self.request.get("id"))
             params = {"page":page}
             if wiki:
                 params["content"] = wiki.content
@@ -120,7 +126,7 @@ class Signup(Handler):
 class Welcome(Handler):
     def get(self):    
         if self.user:    
-            self.render("wiki_welcome.html", username=self.user.username)
+            self.render("wiki_welcome.html", username=self.user.username, page = '/')
         else:
             self.redirect("/wiki/login")
 

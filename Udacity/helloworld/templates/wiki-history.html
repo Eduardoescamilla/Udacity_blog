@@ -12,10 +12,10 @@
             {{wiki.content}}
         </td>
         <td>
-            <a href="/wiki{{wiki.name}}">view</a>
+            <a href="/wiki{{wiki.name}}?id={{wiki.key().id()}}">view</a>
         </td>
         <td>
-            <a href="/wiki/_edit{{wiki.name}}">edit</a>
+            <a href="/wiki/_edit{{wiki.name}}?id={{wiki.key().id()}}">edit</a>
         </td>
     </tr>
     {% endfor %}

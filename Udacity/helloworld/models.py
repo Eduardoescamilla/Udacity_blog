@@ -56,3 +56,10 @@ class Wiki(db.Model):
     def by_name(cls, name):
         u = cls.all().filter('name =', name).get()
         return u
+    
+    @classmethod
+    def by_id(cls, uid):
+        try:
+            return cls.get_by_id(uid)
+        except:
+            return None
